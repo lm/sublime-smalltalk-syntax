@@ -1,0 +1,117 @@
+{
+	"name": "Smalltalk-GNU",
+	"scopeName": "source.smalltalk",
+	"fileTypes": ["st"],
+	"patterns": [
+		{
+			"begin": "([a-zA-Z][a-zA-Z0-9]*)\\s*(subclass:)\\s*([a-zA-Z][a-zA-Z0-9]*)\\s*\\[",
+			"end": "\\]",
+			"patterns": [
+				{
+					"begin": "\\|",
+					"end": "\\|",
+					"patterns": [
+						{
+							"match": "[a-zA-Z][a-zA-Z0-9]*",
+							"name": "variable.other"
+						}
+					]
+				},
+				{ "include": "#pragma" },
+				{
+					"match": "(([a-zA-Z][a-zA-Z0-9]*:)|[+\\-\\/\\\\*~<>=@%|&?!.,:;^]+)\\s*([a-zA-Z][a-zA-Z0-9]*)",
+					"captures": {
+						"1": { "name": "entity.name.function" },
+						"3": { "name": "variable.other" }
+					}
+				},
+				{
+					"match": "([a-zA-Z][a-zA-Z0-9]*)",
+					"name": "entity.name.function"
+				},
+				{ "include": "#block" },
+				{ "include": "#comment" }
+			],
+			"beginCaptures": {
+				"1": { "name": "entity.other.inherited-class" },
+				"2": { "name": "keyword.other" },
+				"3": { "name": "entity.name.type" }
+			}
+		},
+		{ "include": "#block" }
+	],
+	"repository": {
+		"comment": {
+			"begin": "\"",
+			"end": "\"",
+			"name": "comment.block"
+		},
+		"string": {
+			"begin": "'",
+			"end": "'",
+			"name": "string.quoted.double"
+		},
+		"symbol": {
+			"match": "#(([a-zA-Z][a-zA-Z0-9:]*)|[+\\-\\/\\\\*~<>=@%|&?!.,:;^]+)",
+			"name": "constant.language"
+		},
+		"symbol2": {
+			"begin": "#'",
+			"end": "'",
+			"name": "constant.language"
+		},
+		"character": {
+			"match": "\\$(<[0-F]+>|.)",
+			"name": "invalid.illegal"
+		},
+		"number": {
+			"match": "(([0-9]{1,2}r)?[0-9A-F]+)",
+			"name": "constant.numeric"
+		},
+		"special-variable": {
+			"match": "true|false|nil|thisContext",
+			"name": "constant.language"
+		},
+		"variable": {
+			"match": "([a-zA-Z][a-zA-Z0-9]*)",
+			"name": "variable.other"
+		},
+		"selector": {
+			"match": "([a-zA-Z][a-zA-Z0-9]*:)|[+\\-\\/\\\\*~<>=@%|&?!.,:;^]+",
+			"name": "keyword.other"
+		},
+		"literal": {
+			"patterns": [
+				{ "include": "#character" },
+				{ "include": "#special-variable" },
+				{ "include": "#variable" },
+				{ "include": "#number" },
+				{ "include": "#symbol" },
+				{ "include": "#symbol2" },
+				{ "include": "#string" }
+			]
+		},
+		"block": {
+			"begin": "\\[",
+			"end": "\\]",
+			"patterns": [
+				{ "include": "#pragma" },
+				{ "include": "#selector"},
+				{ "include": "#literal" },
+				{ "include": "$self"},
+				{ "include": "#comment" }
+			]
+		},
+		"pragma": {
+			"begin": "<([a-zA-Z][a-zA-Z0-9]*:)",
+			"end": ">",
+			"patterns": [
+				{ "include": "#literal" }
+			],
+			"captures": {
+				"1": { "name": "keyword.other" }
+			}
+		}
+	},
+	"uuid": "e42217b0-9451-4406-8697-4ab7a7b42aa9"
+}
