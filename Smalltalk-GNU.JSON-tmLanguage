@@ -28,7 +28,8 @@
 				"3": { "name": "entity.name.type" }
 			}
 		},
-		{ "include": "#block" }
+		{ "include": "#block" },
+		{ "include": "#comment" }
 	],
 	"repository": {
 		"comment": {
