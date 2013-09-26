@@ -1,5 +1,5 @@
 {
-	"name": "Smalltalk-GNU",
+	"name": "Smalltalk",
 	"scopeName": "source.smalltalk",
 	"fileTypes": ["st"],
 	"patterns": [
@@ -28,8 +28,7 @@
 				"3": { "name": "entity.name.type" }
 			}
 		},
-		{ "include": "#block" },
-		{ "include": "#comment" }
+		{ "include": "#block-body" }
 	],
 	"repository": {
 		"comment": {
@@ -86,10 +85,15 @@
 			"begin": "\\[",
 			"end": "\\]",
 			"patterns": [
+				{ "include": "#block-body" }
+			]
+		},
+		"block-body": {
+			"patterns": [
 				{ "include": "#pragma" },
 				{ "include": "#selector"},
 				{ "include": "#literal" },
-				{ "include": "$self"},
+				{ "include": "#block"},
 				{ "include": "#comment" }
 			]
 		},
