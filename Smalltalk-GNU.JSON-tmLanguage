@@ -52,7 +52,7 @@
 		},
 		"character": {
 			"match": "\\$(<[0-F]+>|.)",
-			"name": "invalid.illegal"
+			"name": "constants.character"
 		},
 		"number": {
 			"match": "(([0-9]{1,2}r)?[0-9A-F]+)",
